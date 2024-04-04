@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_practica/popular_movies_cubit.dart';
+import 'package:flutter_practica/cart_cubit.dart';
 
 class PopularMoviesScreen extends StatelessWidget {
   @override
@@ -8,6 +9,27 @@ class PopularMoviesScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Popular Movies'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.shopping_cart),
+            onPressed: () {
+              final cartCubit = context.read<CartCubit>();
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: Text('Carrito de compras'),
+                  content: Text('Total: \$${cartCubit.total.toStringAsFixed(2)}'),
+                  actions: [
+                    TextButton(
+                      child: Text('OK'),
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: BlocBuilder<PopularMoviesCubit, List<dynamic>>(
         builder: (context, movies) {
@@ -56,8 +78,8 @@ class PopularMoviesScreen extends StatelessWidget {
                 SizedBox(height: 8),
                 ElevatedButton(
                   onPressed: () {
-                    // Aquí puedes agregar la lógica para agregar la película al carrito
-                    print('Película agregada al carrito');
+                    context.read<CartCubit>().addToCart(19.99);
+                    Navigator.of(context).pop();
                   },
                   child: Text('Agregar al carrito'),
                 ),
