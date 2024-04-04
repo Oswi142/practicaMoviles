@@ -49,6 +49,19 @@ class PopularMoviesScreen extends StatelessWidget {
                 SizedBox(height: 8),
                 Text(movie['overview']),
                 SizedBox(height: 8),
+                Text(
+                  'Precio: \$19.99',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 8),
+                ElevatedButton(
+                  onPressed: () {
+                    // Aquí puedes agregar la lógica para agregar la película al carrito
+                    print('Película agregada al carrito');
+                  },
+                  child: Text('Agregar al carrito'),
+                ),
+                SizedBox(height: 8),
                 Image.network(
                   'https://image.tmdb.org/t/p/w500${movie['poster_path']}',
                   width: 200,
