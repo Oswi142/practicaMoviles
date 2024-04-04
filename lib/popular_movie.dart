@@ -28,6 +28,37 @@ class _PopularMoviesScreenState extends State<PopularMoviesScreen> {
     }
   }
 
+  void showMovieDetails(dynamic movie) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  movie['title'],
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 8),
+                Text(movie['overview']),
+                SizedBox(height: 8),
+                Image.network(
+                  'https://image.tmdb.org/t/p/w500${movie['poster_path']}',
+                  width: 200,
+                  height: 300,
+                  fit: BoxFit.cover,
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,6 +77,7 @@ class _PopularMoviesScreenState extends State<PopularMoviesScreen> {
               width: 100,
               fit: BoxFit.cover,
             ),
+            onTap: () => showMovieDetails(movie),
           );
         },
       ),
