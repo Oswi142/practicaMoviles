@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_practica/popular_movie.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const PopularMovies());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class PopularMovies extends StatelessWidget {
+  const PopularMovies({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
+      home: PopularMoviesScreen(),
     );
   }
 }
